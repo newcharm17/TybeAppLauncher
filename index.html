@@ -6,24 +6,17 @@
   <title>TybeAppLauncher Store</title>
   <style>
     :root {
-      --primary: #008080;        /* Teal как в MetroFramework */
+      --primary: #008080;
       --primary-dark: #006060;
-      --primary-light: #33cccc;
       --background: #ffffff;
       --sidebar-bg: #f8f8f8;
       --card-bg: #ffffff;
       --text: #222222;
       --text-light: #666666;
       --border: #e0e0e0;
-      --hover-bg: #f0fafa;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
 
     body {
       background: var(--background);
@@ -32,335 +25,105 @@
       min-height: 100vh;
     }
 
-    /* ===== БОКОВАЯ ПАНЕЛЬ ===== */
     .sidebar {
-      width: 240px;
+      width: 220px;
       background: var(--sidebar-bg);
       border-right: 1px solid var(--border);
-      padding: 24px 0;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .logo {
-      padding: 0 24px 24px;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 16px;
-    }
-
-    .logo h1 {
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--primary);
+      padding: 20px 0;
     }
 
     .sidebar-item {
-      padding: 14px 24px;
+      padding: 12px 24px;
       cursor: pointer;
       font-size: 15px;
-      transition: all 0.2s ease;
-      border-left: 4px solid transparent;
-    }
-
-    .sidebar-item:hover {
-      background: var(--hover-bg);
     }
 
     .sidebar-item.active {
-      background: var(--hover-bg);
-      border-left: 4px solid var(--primary);
-      color: var(--primary);
+      background: var(--primary);
+      color: white;
       font-weight: 600;
     }
 
-    /* ===== ОСНОВНОЙ КОНТЕНТ ===== */
-    .main {
-      flex: 1;
-      padding: 28px;
-      max-width: 1100px;
-    }
+    .main { flex: 1; padding: 24px; max-width: 1000px; }
 
-    .page-title {
-      font-size: 26px;
-      font-weight: 700;
-      margin-bottom: 24px;
-      color: var(--text);
-    }
+    .page-title { font-size: 24px; font-weight: 600; margin-bottom: 20px; }
 
-    /* Сетка приложений */
     .apps-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 22px;
     }
 
     .app-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 20px;
+      border-radius: 6px;
+      padding: 18px;
       cursor: pointer;
-      transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    }
-
-    .app-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 6px 16px rgba(0,128,128,0.12);
-      border-color: var(--primary-light);
     }
 
     .app-icon {
-      width: 56px;
-      height: 56px;
+      width: 50px;
+      height: 50px;
       background: var(--primary);
-      border-radius: 8px;
+      border-radius: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
       font-weight: bold;
-      font-size: 22px;
-      margin-bottom: 16px;
-    }
-
-    .app-title {
-      font-weight: 700;
-      font-size: 17px;
-      margin-bottom: 8px;
-      color: var(--text);
-    }
-
-    .app-desc {
-      font-size: 14px;
-      color: var(--text-light);
-      line-height: 1.5;
+      font-size: 20px;
       margin-bottom: 14px;
-      min-height: 48px;
     }
 
-    .app-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 8px;
-    }
-
-    .app-price {
-      font-weight: 700;
-      color: var(--primary);
-      font-size: 16px;
-    }
+    .app-title { font-weight: 600; font-size: 16px; margin-bottom: 6px; }
+    .app-desc { font-size: 13px; color: var(--text-light); line-height: 1.4; margin-bottom: 12px; }
+    .app-meta { font-size: 12px; color: var(--text-light); }
 
     .install-btn {
       background: var(--primary);
       color: white;
       border: none;
-      padding: 8px 18px;
-      border-radius: 6px;
-      font-size: 14px;
-      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 3px;
+      font-size: 13px;
       cursor: pointer;
-      transition: background 0.2s, transform 0.1s;
-      margin-top: 10px;
     }
-
-    .install-btn:hover {
-      background: var(--primary-dark);
-      transform: scale(1.03);
-    }
-
-    /* Детальная страница */
-    .app-detail {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 28px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-    }
-
-    .app-header {
-      display: flex;
-      align-items: flex-start;
-      gap: 24px;
-      margin-bottom: 20px;
-    }
-
-    .app-icon-big {
-      width: 72px;
-      height: 72px;
-      background: var(--primary);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 32px;
-      font-weight: bold;
-    }
-
-    .app-meta h1 {
-      font-size: 28px;
-      margin-bottom: 8px;
-      font-weight: 800;
-    }
-
-    .app-meta p {
-      color: var(--text-light);
-      font-size: 15px;
-    }
-
-    .app-full-desc {
-      margin: 20px 0;
-      line-height: 1.6;
-      font-size: 15px;
-      color: var(--text);
-    }
-
-    /* Отзывы */
-    .reviews-section h3 {
-      margin: 28px 0 18px;
-      font-size: 20px;
-      font-weight: 700;
-    }
-
-    .review {
-      background: #fafafa;
-      padding: 16px;
-      border-radius: 8px;
-      margin-bottom: 14px;
-      border-left: 3px solid var(--primary-light);
-    }
-
-    .review-header {
-      font-weight: 700;
-      margin-bottom: 6px;
-      color: var(--text);
-    }
-
-    .review-text {
-      color: var(--text);
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .add-review {
-      margin-top: 24px;
-    }
-
-    .add-review textarea {
-      width: 100%;
-      height: 90px;
-      padding: 12px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-family: inherit;
-      font-size: 14px;
-      resize: vertical;
-    }
-
-    .add-review button {
-      margin-top: 10px;
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 8px 20px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 600;
-    }
-
-    footer {
-      margin-top: 40px;
-      padding-top: 24px;
-      border-top: 1px solid var(--border);
-      color: var(--text-light);
-      font-size: 14px;
-      text-align: center;
-    }
-
-    /* Адаптивность */
-    @media (max-width: 768px) {
-      .sidebar {
-        width: 70px;
-      }
-      .sidebar-item span, .logo h1 {
-        display: none;
-      }
-      .sidebar-item {
-        justify-content: center;
-        padding: 16px 0;
-      }
-      .app-header {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-      }
-    }
+    .install-btn:hover { background: var(--primary-dark); }
   </style>
 </head>
 <body>
 
   <div class="sidebar">
-    <div class="logo">
-      <h1>Tybe Store</h1>
-    </div>
-    <div class="sidebar-item active" data-page="store"><span>Магазин</span></div>
-    <div class="sidebar-item" data-page="library"><span>Библиотека</span></div>
+    <div class="sidebar-item active" data-page="store">Магазин</div>
+    <div class="sidebar-item" data-page="library">Библиотека</div>
   </div>
 
   <div class="main">
     <div id="page-store" class="page">
-      <h1 class="page-title">Приложения и расширения</h1>
-      <div class="apps-grid" id="appsGrid">
-        <!-- Карточки -->
-      </div>
+      <h1 class="page-title">Приложения</h1>
+      <div class="apps-grid" id="appsGrid"></div>
     </div>
 
     <div id="page-detail" class="page" style="display:none;"></div>
-
     <div id="page-library" class="page" style="display:none;">
-      <h1 class="page-title">Моя библиотека</h1>
+      <h1 class="page-title">Библиотека</h1>
       <p>Установленные приложения появятся здесь.</p>
     </div>
-
-    <footer>© 2025 Tybe Corp. Все права защищены.</footer>
   </div>
 
   <script>
     const apps = [
       {
-        id: "TybeDiffuser",
-        name: "TybeDiffuser",
+        id: "minesweeper",
+        name: "Сапёр",
         icon: "💣",
-        company: "Tybe Corp.",
-        version: "1.0.2.1",
+        company: "Tybe Software",
+        version: "1.0",
         size: "1.8 MB",
         price: "Бесплатно",
-        description: "Классический Сапёр в стиле  Teal. Без рекламы, без интернета. Горячая клавиша: Alt+N.",
-        fileName: "TybeDiffuser.tlf"
-      },
-      {
-        id: "telegram-theme",
-        name: "Telegram Dark Theme",
-        icon: "T",
-        company: "Tybe Software",
-        version: "1.2.0",
-        size: "2.1 MB",
-        price: "$0.99",
-        description: "Тёмная тема в стиле Telegram для всех приложений TybeAppLauncher.",
-        fileName: "TelegramDark.tlf"
-      },
-      {
-        id: "pdf-plugin",
-        name: "PDF Export Plugin",
-        icon: "P",
-        company: "Tybe Labs",
-        version: "2.0.1",
-        size: "3.4 MB",
-        price: "$1.49",
-        description: "Экспорт документов в PDF из любого редактора без интернета.",
-        fileName: "PDFExport.tlf"
+        description: "Классический Сапёр в стиле MetroFramework Teal. Без рекламы, без интернета.",
+        fileName: "Minesweeper.tlf"
       }
     ];
 
@@ -371,48 +134,32 @@
           <div class="app-icon">${app.icon}</div>
           <div class="app-title">${app.name}</div>
           <div class="app-desc">${app.description}</div>
-          <div class="app-meta">
-            <span>${app.company}</span>
-            <span class="app-price">${app.price}</span>
-          </div>
+          <div class="app-meta">${app.company} • ${app.price}</div>
         </div>
       `).join('');
     }
 
     function showAppDetail(appId) {
       const app = apps.find(a => a.id === appId);
-      if (!app) return;
-
       document.getElementById('page-store').style.display = 'none';
-      document.getElementById('page-library').style.display = 'none';
-      
-      const detailPage = document.getElementById('page-detail');
-      detailPage.innerHTML = `
-        <button onclick="backToStore()" style="margin-bottom: 20px; color: var(--primary); background: none; border: none; cursor: pointer; font-weight: 600;">← Назад в магазин</button>
-        <div class="app-detail">
-          <div class="app-header">
-            <div class="app-icon-big">${app.icon}</div>
-            <div class="app-meta">
-              <h1>${app.name}</h1>
-              <p>Разработчик: ${app.company} • Версия: ${app.version} • Размер: ${app.size}</p>
+      const detail = document.getElementById('page-detail');
+      detail.innerHTML = `
+        <button onclick="backToStore()" style="margin-bottom:16px;color:var(--primary);background:none;border:none;cursor:pointer;">← Назад</button>
+        <div style="background:#fafafa;border:1px solid #e0e0e0;border-radius:8px;padding:20px;">
+          <div style="display:flex;gap:16px;margin-bottom:16px;">
+            <div style="width:60px;height:60px;background:var(--primary);border-radius:6px;display:flex;align-items:center;justify-content:center;color:white;font-size:24px;">${app.icon}</div>
+            <div>
+              <h2 style="font-size:22px;margin-bottom:4px;">${app.name}</h2>
+              <p style="color:#666;font-size:14px;">Разработчик: ${app.company}<br>Версия: ${app.version}<br>Размер: ${app.size}</p>
             </div>
           </div>
-          <div class="app-full-desc">${app.description}</div>
+          <p style="margin:16px 0;">${app.description}</p>
           <button class="install-btn" onclick="installApp('${app.id}', '${app.fileName}')">
             Установить (${app.price})
           </button>
-          <div class="reviews-section">
-            <h3>Отзывы (${getReviewCount(app.id)})</h3>
-            <div id="reviews-${app.id}"></div>
-            <div class="add-review">
-              <textarea id="reviewText-${app.id}" placeholder="Ваш отзыв..."></textarea>
-              <button onclick="addReview('${app.id}')">Оставить отзыв</button>
-            </div>
-          </div>
         </div>
       `;
-      detailPage.style.display = 'block';
-      loadReviews(app.id);
+      detail.style.display = 'block';
     }
 
     function backToStore() {
@@ -424,30 +171,10 @@
       if (typeof tybeHost !== 'undefined') {
         tybeHost.installApp(appId, fileName);
       } else {
-        alert(`Установка: ${fileName}\n(В реальном приложении — запуск установки)`);
+        alert('Установка доступна только в TybeAppLauncher');
       }
     }
 
-    // Отзывы (локально)
-    function getReviewKey(appId) { return `tybe_reviews_${appId}`; }
-    function getReviewCount(appId) { return JSON.parse(localStorage.getItem(getReviewKey(appId)) || '[]').length; }
-    function loadReviews(appId) {
-      const reviews = JSON.parse(localStorage.getItem(getReviewKey(appId)) || '[]');
-      document.getElementById(`reviews-${appId}`).innerHTML = reviews.map(r => 
-        `<div class="review"><div class="review-header">${r.author || 'Аноним'}</div><div class="review-text">${r.text}</div></div>`
-      ).join('');
-    }
-    function addReview(appId) {
-      const text = document.getElementById(`reviewText-${appId}`).value.trim();
-      if (!text) return alert("Напишите отзыв!");
-      const reviews = JSON.parse(localStorage.getItem(getReviewKey(appId)) || '[]');
-      reviews.push({ author: "Вы", text });
-      localStorage.setItem(getReviewKey(appId), JSON.stringify(reviews));
-      loadReviews(appId);
-      document.getElementById(`reviewText-${appId}`).value = '';
-    }
-
-    // Навигация
     document.querySelectorAll('.sidebar-item').forEach(item => {
       item.addEventListener('click', () => {
         document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
