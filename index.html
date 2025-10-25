@@ -6,18 +6,24 @@
   <title>TybeAppLauncher Store</title>
   <style>
     :root {
-      --primary: #0078d7;
-      --primary-dark: #106ebe;
+      --primary: #008080;        /* Teal как в MetroFramework */
+      --primary-dark: #006060;
+      --primary-light: #33cccc;
       --background: #ffffff;
-      --sidebar-bg: #f5f5f5;
-      --card-bg: #fafafa;
-      --text: #1e1e1e;
-      --text-light: #666;
-      --border: #dcdcdc;
-      --hover-bg: #e8f0fe;
+      --sidebar-bg: #f8f8f8;
+      --card-bg: #ffffff;
+      --text: #222222;
+      --text-light: #666666;
+      --border: #e0e0e0;
+      --hover-bg: #f0fafa;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
 
     body {
       background: var(--background);
@@ -26,178 +32,314 @@
       min-height: 100vh;
     }
 
+    /* ===== БОКОВАЯ ПАНЕЛЬ ===== */
     .sidebar {
-      width: 220px;
+      width: 240px;
       background: var(--sidebar-bg);
       border-right: 1px solid var(--border);
-      padding: 20px 0;
+      padding: 24px 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo {
+      padding: 0 24px 24px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 16px;
+    }
+
+    .logo h1 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
     }
 
     .sidebar-item {
-      padding: 12px 24px;
+      padding: 14px 24px;
       cursor: pointer;
       font-size: 15px;
-      transition: background 0.2s;
+      transition: all 0.2s ease;
+      border-left: 4px solid transparent;
     }
 
-    .sidebar-item:hover { background: var(--hover-bg); }
-    .sidebar-item.active { background: var(--primary); color: white; font-weight: 600; }
-    .sidebar-item.active:hover { background: var(--primary-dark); }
+    .sidebar-item:hover {
+      background: var(--hover-bg);
+    }
 
-    .main { flex: 1; padding: 24px; max-width: 1000px; }
+    .sidebar-item.active {
+      background: var(--hover-bg);
+      border-left: 4px solid var(--primary);
+      color: var(--primary);
+      font-weight: 600;
+    }
 
-    .page-title { font-size: 24px; font-weight: 600; margin-bottom: 20px; }
+    /* ===== ОСНОВНОЙ КОНТЕНТ ===== */
+    .main {
+      flex: 1;
+      padding: 28px;
+      max-width: 1100px;
+    }
+
+    .page-title {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      color: var(--text);
+    }
 
     /* Сетка приложений */
     .apps-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 22px;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 24px;
     }
 
     .app-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 18px;
+      border-radius: 10px;
+      padding: 20px;
       cursor: pointer;
-      transition: all 0.25s ease;
+      transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     }
 
     .app-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.08);
-      border-color: var(--primary);
+      transform: translateY(-4px);
+      box-shadow: 0 6px 16px rgba(0,128,128,0.12);
+      border-color: var(--primary-light);
     }
 
     .app-icon {
-      width: 50px;
-      height: 50px;
+      width: 56px;
+      height: 56px;
       background: var(--primary);
-      border-radius: 6px;
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
       font-weight: bold;
-      font-size: 20px;
-      margin-bottom: 14px;
-    }
-
-    .app-title { font-weight: 600; font-size: 16px; margin-bottom: 8px; }
-    .app-desc { font-size: 13px; color: var(--text-light); line-height: 1.4; }
-
-    /* Детальная страница */
-    .app-detail {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 24px;
-    }
-
-    .app-header {
-      display: flex;
-      align-items: flex-start;
-      gap: 20px;
+      font-size: 22px;
       margin-bottom: 16px;
     }
 
-    .app-icon-big {
-      width: 64px;
-      height: 64px;
-      background: var(--primary);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 28px;
-      font-weight: bold;
+    .app-title {
+      font-weight: 700;
+      font-size: 17px;
+      margin-bottom: 8px;
+      color: var(--text);
     }
 
-    .app-meta h1 { font-size: 24px; margin-bottom: 6px; }
-    .app-meta p { color: var(--text-light); font-size: 14px; }
+    .app-desc {
+      font-size: 14px;
+      color: var(--text-light);
+      line-height: 1.5;
+      margin-bottom: 14px;
+      min-height: 48px;
+    }
 
-    .app-full-desc { margin: 16px 0; line-height: 1.6; }
+    .app-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    .app-price {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 16px;
+    }
 
     .install-btn {
       background: var(--primary);
       color: white;
       border: none;
-      padding: 10px 24px;
-      border-radius: 4px;
-      font-size: 16px;
+      padding: 8px 18px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
       cursor: pointer;
-      margin-top: 12px;
-      transition: background 0.2s;
+      transition: background 0.2s, transform 0.1s;
+      margin-top: 10px;
     }
-    .install-btn:hover { background: var(--primary-dark); }
+
+    .install-btn:hover {
+      background: var(--primary-dark);
+      transform: scale(1.03);
+    }
+
+    /* Детальная страница */
+    .app-detail {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+
+    .app-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
+      margin-bottom: 20px;
+    }
+
+    .app-icon-big {
+      width: 72px;
+      height: 72px;
+      background: var(--primary);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 32px;
+      font-weight: bold;
+    }
+
+    .app-meta h1 {
+      font-size: 28px;
+      margin-bottom: 8px;
+      font-weight: 800;
+    }
+
+    .app-meta p {
+      color: var(--text-light);
+      font-size: 15px;
+    }
+
+    .app-full-desc {
+      margin: 20px 0;
+      line-height: 1.6;
+      font-size: 15px;
+      color: var(--text);
+    }
 
     /* Отзывы */
-    .reviews-section h3 { margin: 24px 0 16px; }
-    .review { background: #f0f0f0; padding: 14px; border-radius: 6px; margin-bottom: 12px; }
-    .review-header { font-weight: 600; margin-bottom: 6px; }
-    .review-text { color: var(--text); font-size: 14px; }
+    .reviews-section h3 {
+      margin: 28px 0 18px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .review {
+      background: #fafafa;
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 14px;
+      border-left: 3px solid var(--primary-light);
+    }
+
+    .review-header {
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .review-text {
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.5;
+    }
 
     .add-review {
-      margin-top: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+      margin-top: 24px;
     }
+
     .add-review textarea {
       width: 100%;
-      height: 80px;
-      padding: 10px;
+      height: 90px;
+      padding: 12px;
       border: 1px solid var(--border);
-      border-radius: 4px;
+      border-radius: 8px;
       font-family: inherit;
+      font-size: 14px;
+      resize: vertical;
     }
+
     .add-review button {
-      align-self: flex-start;
+      margin-top: 10px;
       background: var(--primary);
       color: white;
       border: none;
-      padding: 8px 16px;
-      border-radius: 4px;
+      padding: 8px 20px;
+      border-radius: 6px;
       cursor: pointer;
+      font-weight: 600;
     }
 
-    footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--text-light); font-size: 13px; }
+    footer {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      color: var(--text-light);
+      font-size: 14px;
+      text-align: center;
+    }
+
+    /* Адаптивность */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 70px;
+      }
+      .sidebar-item span, .logo h1 {
+        display: none;
+      }
+      .sidebar-item {
+        justify-content: center;
+        padding: 16px 0;
+      }
+      .app-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+    }
   </style>
 </head>
 <body>
 
   <div class="sidebar">
-    <div class="sidebar-item active" data-page="store">Магазин</div>
-    <div class="sidebar-item" data-page="library">Библиотека</div>
+    <div class="logo">
+      <h1>Tybe Store</h1>
+    </div>
+    <div class="sidebar-item active" data-page="store"><span>Магазин</span></div>
+    <div class="sidebar-item" data-page="library"><span>Библиотека</span></div>
   </div>
 
   <div class="main">
-    <!-- Страница магазина (сетка) -->
     <div id="page-store" class="page">
-      <h1 class="page-title">Расширения</h1>
+      <h1 class="page-title">Приложения и расширения</h1>
       <div class="apps-grid" id="appsGrid">
-        <!-- Карточки будут здесь -->
+        <!-- Карточки -->
       </div>
     </div>
 
-    <!-- Детальная страница (изначально скрыта) -->
-    <div id="page-detail" class="page" style="display:none;">
-      <!-- Заполняется динамически -->
-    </div>
+    <div id="page-detail" class="page" style="display:none;"></div>
 
     <div id="page-library" class="page" style="display:none;">
-      <h1 class="page-title">библиотека</h1>
-      <p>Установленные расширения или приложения появятся здесь.</p>
+      <h1 class="page-title">Моя библиотека</h1>
+      <p>Установленные приложения появятся здесь.</p>
     </div>
 
     <footer>© 2025 Tybe Corp. Все права защищены.</footer>
   </div>
 
   <script>
-    // База приложений
     const apps = [
+      {
+        id: "TybeDiffuser",
+        name: "TybeDiffuser",
+        icon: "💣",
+        company: "Tybe Corp.",
+        version: "1.0.2.1",
+        size: "1.8 MB",
+        price: "Бесплатно",
+        description: "Классический Сапёр в стиле  Teal. Без рекламы, без интернета. Горячая клавиша: Alt+N.",
+        fileName: "TybeDiffuser.tlf"
+      },
       {
         id: "telegram-theme",
         name: "Telegram Dark Theme",
@@ -206,7 +348,7 @@
         version: "1.2.0",
         size: "2.1 MB",
         price: "$0.99",
-        description: "Полностью оффлайн тема в стиле Telegram для всех приложений TybeAppLauncher. Поддержка Windows 10/11, включая тёмный режим и анимации.",
+        description: "Тёмная тема в стиле Telegram для всех приложений TybeAppLauncher.",
         fileName: "TelegramDark.tlf"
       },
       {
@@ -217,24 +359,26 @@
         version: "2.0.1",
         size: "3.4 MB",
         price: "$1.49",
-        description: "Экспорт документов в PDF из любого редактора без интернета. Поддержка шрифтов, изображений и таблиц.",
+        description: "Экспорт документов в PDF из любого редактора без интернета.",
         fileName: "PDFExport.tlf"
       }
     ];
 
-    // Рендер сетки
     function renderStore() {
       const grid = document.getElementById('appsGrid');
       grid.innerHTML = apps.map(app => `
         <div class="app-card" onclick="showAppDetail('${app.id}')">
           <div class="app-icon">${app.icon}</div>
           <div class="app-title">${app.name}</div>
-          <div class="app-desc">${app.company} • ${app.price}</div>
+          <div class="app-desc">${app.description}</div>
+          <div class="app-meta">
+            <span>${app.company}</span>
+            <span class="app-price">${app.price}</span>
+          </div>
         </div>
       `).join('');
     }
 
-    // Показ деталей
     function showAppDetail(appId) {
       const app = apps.find(a => a.id === appId);
       if (!app) return;
@@ -244,7 +388,7 @@
       
       const detailPage = document.getElementById('page-detail');
       detailPage.innerHTML = `
-        <button onclick="backToStore()" style="margin-bottom: 16px; color: var(--primary); background: none; border: none; cursor: pointer;">← Назад в магазин</button>
+        <button onclick="backToStore()" style="margin-bottom: 20px; color: var(--primary); background: none; border: none; cursor: pointer; font-weight: 600;">← Назад в магазин</button>
         <div class="app-detail">
           <div class="app-header">
             <div class="app-icon-big">${app.icon}</div>
@@ -257,7 +401,6 @@
           <button class="install-btn" onclick="installApp('${app.id}', '${app.fileName}')">
             Установить (${app.price})
           </button>
-
           <div class="reviews-section">
             <h3>Отзывы (${getReviewCount(app.id)})</h3>
             <div id="reviews-${app.id}"></div>
@@ -269,8 +412,6 @@
         </div>
       `;
       detailPage.style.display = 'block';
-
-      // Загружаем отзывы
       loadReviews(app.id);
     }
 
@@ -279,7 +420,6 @@
       document.getElementById('page-store').style.display = 'block';
     }
 
-    // === УСТАНОВКА ===
     function installApp(appId, fileName) {
       if (typeof tybeHost !== 'undefined') {
         tybeHost.installApp(appId, fileName);
@@ -288,57 +428,37 @@
       }
     }
 
-    // === ОТЗЫВЫ ===
-    function getReviewKey(appId) {
-      return `tybe_reviews_${appId}`;
-    }
-
-    function getReviewCount(appId) {
-      const reviews = JSON.parse(localStorage.getItem(getReviewKey(appId)) || '[]');
-      return reviews.length;
-    }
-
+    // Отзывы (локально)
+    function getReviewKey(appId) { return `tybe_reviews_${appId}`; }
+    function getReviewCount(appId) { return JSON.parse(localStorage.getItem(getReviewKey(appId)) || '[]').length; }
     function loadReviews(appId) {
-      const key = getReviewKey(appId);
-      const reviews = JSON.parse(localStorage.getItem(key) || '[]');
-      const container = document.getElementById(`reviews-${appId}`);
-      container.innerHTML = reviews.map(r => 
-        `<div class="review">
-          <div class="review-header">${r.author || 'Аноним'}</div>
-          <div class="review-text">${r.text}</div>
-        </div>`
+      const reviews = JSON.parse(localStorage.getItem(getReviewKey(appId)) || '[]');
+      document.getElementById(`reviews-${appId}`).innerHTML = reviews.map(r => 
+        `<div class="review"><div class="review-header">${r.author || 'Аноним'}</div><div class="review-text">${r.text}</div></div>`
       ).join('');
     }
-
     function addReview(appId) {
       const text = document.getElementById(`reviewText-${appId}`).value.trim();
       if (!text) return alert("Напишите отзыв!");
-      
-      const key = getReviewKey(appId);
-      const reviews = JSON.parse(localStorage.getItem(key) || '[]');
-      reviews.push({ author: "Вы", text: text, date: new Date().toISOString() });
-      localStorage.setItem(key, JSON.stringify(reviews));
-      
+      const reviews = JSON.parse(localStorage.getItem(getReviewKey(appId)) || '[]');
+      reviews.push({ author: "Вы", text });
+      localStorage.setItem(getReviewKey(appId), JSON.stringify(reviews));
       loadReviews(appId);
       document.getElementById(`reviewText-${appId}`).value = '';
     }
 
-    // Переключение боковой панели
+    // Навигация
     document.querySelectorAll('.sidebar-item').forEach(item => {
       item.addEventListener('click', () => {
         document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
         document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
-        
         item.classList.add('active');
-        const pageId = item.getAttribute('data-page');
-        if (pageId === 'store') {
-          renderStore();
-        }
-        document.getElementById(`page-${pageId}`).style.display = 'block';
+        const id = item.getAttribute('data-page');
+        if (id === 'store') renderStore();
+        document.getElementById(`page-${id}`).style.display = 'block';
       });
     });
 
-    // Старт
     renderStore();
   </script>
 
